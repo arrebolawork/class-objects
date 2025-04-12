@@ -24,7 +24,7 @@ class Student extends Person {
 
 // Crear la clase Teacher, que hereda de Person, e incluye las propiedades asignatura y level y el método assign(), que muestre por consola el resultado.
 
-class Teacher {
+class Teacher extends Person {
   constructor(name, age, genre, asignature, level) {
     super(name, age, genre);
     this.asignature = asignature;
@@ -48,7 +48,7 @@ class Warrior {
     return this.power;
   };
   // defend(damage): resta el valor del parámetro recibido damage al valor de la propiedad life. Después, imprime el valor de la vida restante.
-  defende = (damage) => {
+  defend = (damage) => {
     this.life = this.life - damage;
     return console.log(this.life);
   };
@@ -57,6 +57,9 @@ class Warrior {
 // Maya: extiende de la clase Warrior
 class Maya extends Warrior {
   // constructor: Aquí establecemos los valores para el maya, que no hay que olvidar que es un guerrero.
+  constructor() {
+    super(100, 50);
+  }
   // drinkColaCao: Suma 10 al poder.
   drinkColaCao = () => {
     this.power += 10;
@@ -65,6 +68,9 @@ class Maya extends Warrior {
 // Aztec: extiende de la clase Warrior
 class Aztec extends Warrior {
   // constructor: Aquí establecemos los valores para el azteca, que no hay que olvidar que es un guerrero.
+  constructor() {
+    super(100, 60);
+  }
   // drinkNesquik: Suma 10 a la vida.
   drinkNesquik = () => {
     this.life += 10;
@@ -72,15 +78,15 @@ class Aztec extends Warrior {
 }
 
 // Realiza la siguiente cadena de intercambio de golpes.
-const newAzteca = new Aztec(20, 20);
-const newMaya = new Maya(20, 20);
+const newAzteca = new Aztec();
+const newMaya = new Maya();
 // Azteca bebe nesquik
 newAzteca.drinkNesquik();
 // Maya bebe Cola Cao
 newMaya.drinkColaCao();
 // Maya ataca a azteca. Azteca defiende.
-newMaya.attack();
-newAzteca.defende(5);
+
+newAzteca.defend(newMaya.attack());
 // Azteca ataca a maya. Maya defiende.
-newAzteca.attack();
-newMaya.defende(5);
+
+newMaya.defend(newAzteca.attack());
